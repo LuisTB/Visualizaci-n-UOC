@@ -16,7 +16,7 @@ if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
 
 ## PEC 2 - Marimekko Chart
 
-```{r}
+```{r, warning=FALSE}
 # Cargamos el dataset
 data <- read.csv("gym_members_exercise_tracking.csv")
 
