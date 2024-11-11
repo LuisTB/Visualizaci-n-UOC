@@ -1,0 +1,39 @@
+---
+title: "Marimekko_PEC2"
+author: "Luis Oña Riveros"
+date: "2024-11"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# Cargamos las librerias necesarias
+if (!require('ggplot2')) install.packages('ggplot2'); library('ggplot2')
+if (!require('ggmosaic')) install.packages('ggmosaic'); library('ggmosaic')
+if (!require('dplyr')) install.packages('dplyr'); library('dplyr')
+```
+
+## PEC 2 - Marimekko Chart
+
+```{r}
+# Cargamos el dataset
+data <- read.csv("gym_members_exercise_tracking.csv")
+
+# Creamos la tabla de frecuencias por cada combinación de nuestras variables
+summary_data <- as.data.frame(table(data$Gender, data$Workout_Type))
+colnames(summary_data) <- c("Gender", "Workout_Type", "Frequency")
+
+# Gráfico de Marimekko mediante geom_mosaic()
+ggplot(data = summary_data) +
+  geom_mosaic(aes(weight = Frequency, x = product(Workout_Type, Gender), fill = Workout_Type)) +
+  labs(title = "Marimekko Chart de las variables Gender y Workout Type",
+       x = "% Gender",
+       y = "% Workout Type") +
+  theme_minimal()
+
+# Mostramos la tabla con sus valores
+knitr::kable(summary_data, caption = "Valores por cada combinación")
+```
+
+
